@@ -5,16 +5,18 @@ from homework_02.exceptions import CargoOverload
 
 class Plane(Vehicle):
 
-    def __init__(self, max_cargo, cargo):
-        super().__init__(max_cargo)
-        self.cargo = cargo
+    def __init__(self, fuel, weight, fuel_consumption, max_cargo):
+        super().__init__(fuel, weight, fuel_consumption)
+        self.cargo = 0
+        self.max_cargo = max_cargo
 
-    def load_cargo(self, numbers: int):
-        if numbers + self.cargo > self.max_cargo:
+    def load_cargo(self, weight):
+        if self.cargo + weight > self.max_cargo:
             raise CargoOverload
 
-        self.cargo += numbers
+        self.cargo += weight
 
     def remove_all_cargo(self) -> int:
-        zeroing = self.cargo * 0
-        return zeroing
+        weight = self.cargo
+        self.cargo = 0
+        return weight
